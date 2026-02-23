@@ -42,6 +42,9 @@ class TicTacToe:
 
         self.lbl_turno = tk.Label(controls, text=f"Turno: {self.turno}", font=("Arial", 12))
         self.lbl_turno.pack()
+        btn_reset = tk.Button(controls, text="Reiniciar", command=self.reset_game)
+        btn_reset.pack(pady=6)
+
 
     def marcar_casilla(self, i: int):
         """Marca una casilla si está vacía y el juego sigue activo."""
@@ -81,6 +84,21 @@ class TicTacToe:
     def _hay_empate(self) -> bool:
         """Devuelve True si el tablero está lleno y nadie ganó."""
         return all(celda != "" for celda in self.tablero)
+ feature-reset
+    
+
+    def reset_game(self):
+        """Reinicia tablero, turno y permite jugar otra vez sin cerrar la ventana."""
+        self.turno = "X"
+        self.tablero = [""] * 9
+        self.juego_activo = True
+
+        for btn in self.botones:
+            btn.config(text="")
+
+        self.lbl_turno.config(text=f"Turno: {self.turno}")
+
+ main
 
 
 if __name__ == "__main__":
