@@ -84,6 +84,7 @@ class TicTacToe:
     def _hay_empate(self) -> bool:
         """Devuelve True si el tablero está lleno y nadie ganó."""
         return all(celda != "" for celda in self.tablero)
+ feature-reset
     
 
     def reset_game(self):
@@ -96,6 +97,8 @@ class TicTacToe:
             btn.config(text="")
 
         self.lbl_turno.config(text=f"Turno: {self.turno}")
+
+ main
 
 
 if __name__ == "__main__":
