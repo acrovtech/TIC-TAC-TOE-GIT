@@ -11,6 +11,7 @@ class TicTacToe:
     def __init__(self, root: tk.Tk):
         self.root = root
         self.root.title("Tic Tac Toe - Práctica Git")
+        self.root.configure(bg="#1e1e1e")
 
         # Estado del juego
         self.turno = "X"
@@ -22,7 +23,7 @@ class TicTacToe:
 
     def _build_ui(self):
         """Construye la interfaz: tablero + indicador de turno."""
-        board = tk.Frame(self.root, padx=10, pady=10)
+        board = tk.Frame(self.root, padx=10, pady=10, bg="#1e1e1e")
         board.pack()
 
         for i in range(9):
@@ -32,18 +33,43 @@ class TicTacToe:
                 font=("Arial", 20),
                 width=5,
                 height=2,
+                bg="#2d2d2d",
+                fg="white",
+                activebackground="#3c3c3c",
+                activeforeground="white",
+                relief="flat",
+                bd=0,
                 command=lambda i=i: self.marcar_casilla(i),
             )
             btn.grid(row=i // 3, column=i % 3, padx=4, pady=4)
             self.botones.append(btn)
 
-        controls = tk.Frame(self.root, pady=5)
+        controls = tk.Frame(self.root, pady=5, bg="#1e1e1e")
         controls.pack()
 
-        self.lbl_turno = tk.Label(controls, text=f"Turno: {self.turno}", font=("Arial", 12))
+        self.lbl_turno = tk.Label(
+            controls,
+            text=f"Turno: {self.turno}",
+            font=("Arial", 12, "bold"),
+            bg="#1e1e1e",
+            fg="white"
+        )
         self.lbl_turno.pack()
-        btn_reset = tk.Button(controls, text="Reiniciar", command=self.reset_game)
-        btn_reset.pack(pady=6)
+        
+        btn_reset = tk.Button(
+            controls,
+            text="Reiniciar",
+            command=self.reset_game,
+            bg="#ff8c00",
+            fg="black",
+            activebackground="#ffa733",
+            activeforeground="black",
+            relief="flat",
+            bd=0,
+            padx=12,
+            pady=6
+        )
+        btn_reset.pack(pady=10)
 
 
     def marcar_casilla(self, i: int):
