@@ -11,7 +11,10 @@ class TicTacToe:
     def __init__(self, root: tk.Tk):
         self.root = root
         self.root.title("Tic Tac Toe - Práctica Git")
+ feature-gui-styling
         self.root.configure(bg="#1e1e1e")
+
+ main
 
         # Estado del juego
         self.turno = "X"
@@ -23,7 +26,11 @@ class TicTacToe:
 
     def _build_ui(self):
         """Construye la interfaz: tablero + indicador de turno."""
+ feature-gui-styling
         board = tk.Frame(self.root, padx=10, pady=10, bg="#1e1e1e")
+
+        board = tk.Frame(self.root, padx=10, pady=10)
+ main
         board.pack()
 
         for i in range(9):
@@ -44,7 +51,11 @@ class TicTacToe:
             btn.grid(row=i // 3, column=i % 3, padx=4, pady=4)
             self.botones.append(btn)
 
+ feature-gui-styling
         controls = tk.Frame(self.root, pady=5, bg="#1e1e1e")
+
+        controls = tk.Frame(self.root, pady=5)
+ main
         controls.pack()
 
         self.lbl_turno = tk.Label(
@@ -55,6 +66,7 @@ class TicTacToe:
             fg="white"
         )
         self.lbl_turno.pack()
+ feature-gui-styling
         
         btn_reset = tk.Button(
             controls,
@@ -70,6 +82,10 @@ class TicTacToe:
             pady=6
         )
         btn_reset.pack(pady=10)
+
+        btn_reset = tk.Button(controls, text="Reiniciar", command=self.reset_game)
+        btn_reset.pack(pady=6)
+ main
 
 
     def marcar_casilla(self, i: int):
@@ -110,6 +126,10 @@ class TicTacToe:
     def _hay_empate(self) -> bool:
         """Devuelve True si el tablero está lleno y nadie ganó."""
         return all(celda != "" for celda in self.tablero)
+ feature-gui-styling
+
+ feature-reset
+ main
     
 
     def reset_game(self):
@@ -123,6 +143,11 @@ class TicTacToe:
 
         self.lbl_turno.config(text=f"Turno: {self.turno}")
 
+ feature-gui-styling
+
+ main
+
+ main
 
 if __name__ == "__main__":
     root = tk.Tk()
