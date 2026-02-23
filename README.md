@@ -1,6 +1,6 @@
 # Tic Tac Toe (Tkinter)
 
-Integrantes: TU NOMBRE AQUÍ
+Integrantes: Adriano
 
 Juego de Tic Tac Toe (3 en raya) hecho con Python + Tkinter.
 Turnos: X y O. Gana con 3 en línea.
