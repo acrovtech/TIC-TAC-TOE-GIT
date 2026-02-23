@@ -11,14 +11,17 @@ class TicTacToe:
     def __init__(self, root: tk.Tk):
         self.root = root
         self.root.title("Tic Tac Toe - Práctica Git")
+
+        # Estado del juego
         self.turno = "X"
         self.tablero = [""] * 9
         self.botones: list[tk.Button] = []
+        self.juego_activo = True  # evita seguir jugando tras ganar/empatar
 
         self._build_ui()
 
     def _build_ui(self):
-        # Frame tablero
+        """Construye la interfaz: tablero + indicador de turno."""
         board = tk.Frame(self.root, padx=10, pady=10)
         board.pack()
 
@@ -34,7 +37,6 @@ class TicTacToe:
             btn.grid(row=i // 3, column=i % 3, padx=4, pady=4)
             self.botones.append(btn)
 
-        # Frame controles (más adelante aquí irá Reset en su rama)
         controls = tk.Frame(self.root, pady=5)
         controls.pack()
 
@@ -42,15 +44,43 @@ class TicTacToe:
         self.lbl_turno.pack()
 
     def marcar_casilla(self, i: int):
+        """Marca una casilla si está vacía y el juego sigue activo."""
+        if not self.juego_activo:
+            return
+
         if self.tablero[i] != "":
             return
 
+        # 1) marcar en tablero + UI
         self.tablero[i] = self.turno
         self.botones[i].config(text=self.turno)
 
-        # NOTA: lógica de ganador/empate irá en feature-logic
+        # 2) verificar ganador
+        if self._hay_ganador(self.turno):
+            self.juego_activo = False
+            messagebox.showinfo("Fin del juego", f"¡Ganó {self.turno}!")
+            return
+
+        # 3) verificar empate
+        if self._hay_empate():
+            self.juego_activo = False
+            messagebox.showinfo("Fin del juego", "¡Empate! No hay espacios disponibles.")
+            return
+
+        # 4) cambiar turno
         self.turno = "O" if self.turno == "X" else "X"
         self.lbl_turno.config(text=f"Turno: {self.turno}")
+
+    def _hay_ganador(self, jugador: str) -> bool:
+        """Devuelve True si 'jugador' tiene una combinación ganadora."""
+        for a, b, c in WIN_COMBOS:
+            if self.tablero[a] == jugador and self.tablero[b] == jugador and self.tablero[c] == jugador:
+                return True
+        return False
+
+    def _hay_empate(self) -> bool:
+        """Devuelve True si el tablero está lleno y nadie ganó."""
+        return all(celda != "" for celda in self.tablero)
 
 
 if __name__ == "__main__":
